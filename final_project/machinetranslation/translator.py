@@ -20,30 +20,24 @@ language_translator = LanguageTranslatorV3(
 
 language_translator.set_service_url(url)
 
-#translator = LanguageTranslatorV3(
-#    version='2018-05-01',
-#    iam_apikey='apikey',
-#    url='url'
-#)
-
 def english_to_french(english_text):
-
     """Function that translates english text into french text"""
+    if english_text is None:
+        return None
     translation = language_translator.translate(
-    text=english_text,
-    model_id='en-fr').get_result()
-    french_text = json.dumps(translation, indent=2, ensure_ascii=False)
-    #french_text = translation['translations'][0]['translation']
-
+        text=english_text,
+        model_id='en-fr'
+    ).get_result()
+    french_text = translation['translations'][0]['translation']
     return french_text
 
 def french_to_english(french_text):
-
     """Function that translates french text into english text"""
+    if french_text is None:
+        return None
     translation = language_translator.translate(
-    text=french_text,
-    model_id='fr-en').get_result()
-    english_text = json.dumps(translation, indent=2, ensure_ascii=False)
-    #english_text = translation['translations'][0]['translation']
-
-    return english_text
+        text=french_text,
+        model_id='fr-en'
+    ).get_result()
+    english_text = translation['translations'][0]['translation']
+    return english_text    
